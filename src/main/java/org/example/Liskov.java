@@ -10,21 +10,28 @@ public class Liskov {
         System.out.println("11 - 3 = " + b.func(11,3));
         System.out.println("1 - 8 = " + b.func(11,3));
         System.out.println("11 + 3 + 9 = " + b.func(11,3));
+        System.out.println("11 - 3 = " + b.fun3(11,3));
     }
 
 }
 
-class A {
+class Base {
+
+}
+class A extends Base{
     public int func(int num1,int num2) {
         return num1 - num2;
     }
 }
-class B extends A {
-    @Override
+class B extends Base {
+    private A a = new A();
     public int func(int num1, int num2) {
         return num1 + num2;
     }
     public int fun2(int a,int b) {
         return func(a,b) + 9;
+    }
+    public int fun3 (int a,int b) {
+        return this.a.func(a,b);
     }
 }
