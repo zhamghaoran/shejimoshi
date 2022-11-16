@@ -2,7 +2,6 @@ package org.example.prototype;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.*;
 
@@ -11,9 +10,11 @@ import java.io.*;
 public class DeepProtoType1 implements Serializable, Cloneable {
     private String name;
     public DeepCloneableTarget deepCloneableTarget;
-    public DeepProtoType1 () {
+
+    public DeepProtoType1() {
         super();
     }
+
     @Override
     public DeepProtoType1 clone() {
         try {
@@ -22,7 +23,6 @@ public class DeepProtoType1 implements Serializable, Cloneable {
             throw new AssertionError();
         }
     }
-
 
     public Object deepClone() throws IOException {
         ByteArrayOutputStream bos = null;
@@ -36,7 +36,7 @@ public class DeepProtoType1 implements Serializable, Cloneable {
             oos.writeObject(this);  // 当前这个对象以对象流的方式输出
             // 反序列化
             bis = new ByteArrayInputStream(bos.toByteArray());
-            ois =  new ObjectInputStream(bis);
+            ois = new ObjectInputStream(bis);
             DeepProtoType1 copyObj = (DeepProtoType1) ois.readObject();
             return copyObj;
         } catch (Exception e) {
@@ -51,7 +51,6 @@ public class DeepProtoType1 implements Serializable, Cloneable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
 
     }

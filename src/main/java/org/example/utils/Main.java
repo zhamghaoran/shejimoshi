@@ -1,4 +1,4 @@
-package org.example;
+package org.example.utils;
 
 /**
  * 1.简单比较容易想到
