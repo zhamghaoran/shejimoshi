@@ -3,16 +3,25 @@ package org.example.prototype;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.IOException;
+import java.io.Serial;
+import java.io.Serializable;
+
 public class Client {
-    public static void main(String[] args) {
-        Sheep sheep = new Sheep("tom", 1, "白色");
-        Sheep clone = sheep.clone();
+    public static void main(String[] args) throws CloneNotSupportedException, IOException {
+        DeepProtoType p = new DeepProtoType();
+        p.setName("123");
+        p.deepCloneableTarget = new DeepCloneableTarget("大牛","小牛");
+//        DeepProtoType p2 = (DeepProtoType) p.clone();
+        DeepProtoType p2 = (DeepProtoType) p.clone();
+        System.out.println("p.name = " + p.getName() + " p.deepcloneTargetName = " + p.deepCloneableTarget.hashCode());
+        System.out.println("p2.name = " + p2.getName() + " p2.deepcloneTargetName = " + p2.deepCloneableTarget.hashCode());
     }
 }
 
 @Data
 @AllArgsConstructor
-class Sheep implements Cloneable{
+class Sheep implements Cloneable {
     private String name;
     private Integer age;
     private String color;
@@ -26,5 +35,20 @@ class Sheep implements Cloneable{
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
         }
+    }
+}
+
+class DeepCloneableTarget implements Serializable, Cloneable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+    private String cloneName;
+    private String cloneClass;
+    public DeepCloneableTarget(String cloneName,String cloneClass) {
+        this.cloneName = cloneName;
+        this.cloneClass = cloneClass;
+    }
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
