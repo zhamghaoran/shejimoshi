@@ -9,11 +9,11 @@ import java.io.Serializable;
 
 public class Client {
     public static void main(String[] args) throws CloneNotSupportedException, IOException {
-        DeepProtoType p = new DeepProtoType();
+        DeepProtoType1 p = new DeepProtoType1();
         p.setName("123");
         p.deepCloneableTarget = new DeepCloneableTarget("大牛","小牛");
 //        DeepProtoType p2 = (DeepProtoType) p.clone();
-        DeepProtoType p2 = (DeepProtoType) p.clone();
+        DeepProtoType1 p2 = (DeepProtoType1) p.deepClone();
         System.out.println("p.name = " + p.getName() + " p.deepcloneTargetName = " + p.deepCloneableTarget.hashCode());
         System.out.println("p2.name = " + p2.getName() + " p2.deepcloneTargetName = " + p2.deepCloneableTarget.hashCode());
     }

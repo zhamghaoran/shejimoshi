@@ -30,9 +30,11 @@ public class DeepProtoType1 implements Serializable, Cloneable {
         ByteArrayInputStream bis = null;
         ObjectInputStream ois = null;
         try {
+            // 序列化
             bos = new ByteArrayOutputStream();
             oos = new ObjectOutputStream(bos);
-            oos.writeObject(this);
+            oos.writeObject(this);  // 当前这个对象以对象流的方式输出
+            // 反序列化
             bis = new ByteArrayInputStream(bos.toByteArray());
             ois =  new ObjectInputStream(bis);
             DeepProtoType1 copyObj = (DeepProtoType1) ois.readObject();
